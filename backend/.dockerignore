@@ -1,0 +1,51 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+dist/
+build/
+
+# Virtual environment
+.venv/
+venv/
+ENV/
+env/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Database files (will be created in container)
+*.db
+*.sqlite
+*.sqlite3
+app.db
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# Logs
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Git
+.git/
+.gitignore
+
+# Migrations (we'll copy them, but ignore version control files)
+migrations/versions/__pycache__/
+
+# Instance folder contents (but keep the folder)
+instance/*
+!instance/.gitkeep
