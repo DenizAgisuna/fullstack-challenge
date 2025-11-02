@@ -31,7 +31,7 @@ A full-stack application for managing and visualizing clinical trial participant
 
 1. **Clone the repository:**
 ```bash
-git clone <repository-url>
+git clone https://github.com/DenizAgisuna/fullstack-challenge.git
 cd fullstack-challenge-1
 ```
 
