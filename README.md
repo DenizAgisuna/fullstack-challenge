@@ -23,32 +23,68 @@ A full-stack application for managing and visualizing clinical trial participant
 ## 🚀 Quick Start
 
 ### Prerequisites
-- Docker and Docker Compose installed
-- Git
+- **Node.js** (v18 or higher) and **npm** installed
+- **Docker** and **Docker Compose** installed (for backend)
+- **Git**
 
-### Running with Docker
+### Setup Instructions
 
-1. Clone the repository:
+1. **Clone the repository:**
 ```bash
 git clone <repository-url>
-cd full-stack-technical-challenge
+cd fullstack-challenge-1
 ```
 
-2. Start the application:
+2. **Start the Backend (Docker):**
 ```bash
-docker compose up --build
+# Navigate to project root and start backend service
+docker compose up backend --build
 ```
 
 This will:
-- Build both frontend and backend containers
+- Build the backend container
 - Run database migrations
 - Seed the database with test users and participants
-- Start both services
+- Start the backend service on port 5000
 
-3. Access the application:
+3. **Start the Frontend (npm):**
+```bash
+# Navigate to frontend directory
+cd frontend
+
+# Install dependencies (first time only)
+npm install
+
+# Start the development server
+npm run dev
+```
+
+The frontend will start on http://localhost:3000
+
+4. **Access the application:**
 - **Frontend**: http://localhost:3000
 - **Backend API**: http://localhost:5000/api
 - **Health Check**: http://localhost:5000/api/health
+
+### Alternative: Running Backend Only
+
+If you only want to start the backend service:
+
+```bash
+docker compose up backend --build
+```
+
+Or to run in detached mode:
+
+```bash
+docker compose up -d backend --build
+```
+
+To stop the backend:
+
+```bash
+docker compose down
+```
 
 ### Test Credentials
 
@@ -64,23 +100,28 @@ The database is automatically seeded with test users:
 
 ## 🧪 Testing
 
-
 ### How to Test Protected Routes
 
-1. Start the application with Docker:
+1. Start the backend with Docker:
 ```bash
-docker compose up --build
+docker compose up backend --build
 ```
 
-2. Navigate to http://localhost:3000
+2. Start the frontend:
+```bash
+cd frontend
+npm run dev
+```
 
-3. Register a new user or login with test credentials
+3. Navigate to http://localhost:3000
 
-4. Once authenticated, try accessing:
+4. Register a new user or login with test credentials
+
+5. Once authenticated, try accessing:
    - Dashboard: http://localhost:3000/dashboard
    - Participant detail: http://localhost:3000/participants/1
 
-5. Test API directly (requires authentication):
+6. Test API directly (requires authentication):
 ```bash
 # Login to get token
 curl -X POST http://localhost:5000/api/auth/login \
@@ -164,7 +205,7 @@ I believe in transparency about AI usage while demonstrating ability to effectiv
 
 ## 📝 Additional Notes
 
-**Database Seeding**: Auto-seeds on first run. Force re-seed: `docker compose down -v && docker compose up --build` or `SEED_DB=true docker compose up`
+**Database Seeding**: Auto-seeds on first run. Force re-seed: `docker compose down -v && docker compose up backend --build` or `SEED_DB=true docker compose up backend`
 
 **Logging**: Backend logs via `docker compose logs -f backend`. Frontend logs in browser console.
 

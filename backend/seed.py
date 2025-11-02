@@ -12,9 +12,22 @@ app = create_app()
 with app.app_context():
     should_seed = os.getenv("SEED_DB", "false").lower() == "true"
 
-    user_count = User.query.count()
-    participant_count = Participant.query.count()
-    is_empty = user_count == 0 and participant_count == 0
+    # Check if tables exist and get counts
+    try:
+        user_count = User.query.count()
+        participant_count = Participant.query.count()
+        is_empty = user_count == 0 and participant_count == 0
+    except Exception as e:
+        # Check if it's an OperationalError (table doesn't exist)
+        error_type = type(e).__name__
+        if error_type == "OperationalError" or "no such table" in str(e).lower():
+            # Tables don't exist yet
+            user_count = 0
+            participant_count = 0
+            is_empty = True
+        else:
+            # Re-raise if it's a different error
+            raise
 
     if not should_seed and not is_empty:
         print("Database already has data. Skipping seed.")
